@@ -1,0 +1,658 @@
+{
+  "objects": [
+    {
+      "package": {
+        "name": "@cortexapps/backstage-plugin",
+        "scope": "cortexapps",
+        "version": "1.2.12",
+        "description": "![scorecards](./docs/screen1.png?raw=true)",
+        "date": "2022-10-05T21:46:28.474Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40cortexapps%2Fbackstage-plugin",
+          "homepage": "https://github.com/cortexapps/backstage-plugin#readme",
+          "repository": "https://github.com/cortexapps/backstage-plugin",
+          "bugs": "https://github.com/cortexapps/backstage-plugin/issues"
+        },
+        "publisher": {
+          "username": "nikhilunni",
+          "email": "nikhil.unni@getcortexapp.com"
+        },
+        "maintainers": [
+          { "username": "nikhilunni", "email": "nikhil.unni@getcortexapp.com" }
+        ]
+      },
+      "score": {
+        "final": 0.3718371515467279,
+        "detail": {
+          "quality": 0.8288312577518334,
+          "popularity": 0.018631735870032123,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000099390556
+    },
+    {
+      "package": {
+        "name": "@backstage/core-plugin-api",
+        "scope": "backstage",
+        "version": "1.0.6",
+        "description": "Core API used by Backstage plugins",
+        "keywords": ["backstage"],
+        "date": "2022-09-20T13:22:32.211Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fcore-plugin-api",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.3342216453311515,
+        "detail": {
+          "quality": 0.5575490468611138,
+          "popularity": 0.14368647030328774,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000058640107
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-catalog-react",
+        "scope": "backstage",
+        "version": "1.1.4",
+        "description": "A frontend library that helps other Backstage plugins interact with the catalog",
+        "keywords": ["backstage"],
+        "date": "2022-09-20T13:23:45.852Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-catalog-react",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.32897737084519546,
+        "detail": {
+          "quality": 0.5575490468611138,
+          "popularity": 0.12870282891484186,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.00004598426
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-search-common",
+        "scope": "backstage",
+        "version": "1.0.1",
+        "description": "Common functionalities for Search, to be shared between various search-enabled plugins",
+        "keywords": ["backstage", "search"],
+        "date": "2022-09-20T13:23:05.951Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-search-common",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.32554119722783065,
+        "detail": {
+          "quality": 0.5575490468611138,
+          "popularity": 0.11888519000808528,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000034021516
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-catalog-common",
+        "scope": "backstage",
+        "version": "1.0.6",
+        "description": "Common functionalities for the catalog plugin",
+        "keywords": ["backstage"],
+        "date": "2022-09-20T13:23:37.480Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-catalog-common",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.31898052049537284,
+        "detail": {
+          "quality": 0.5575490468611138,
+          "popularity": 0.10014039934392013,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000023773502
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-scaffolder-backend",
+        "scope": "backstage",
+        "version": "1.6.0",
+        "description": "The Backstage backend plugin that helps you create new things",
+        "keywords": ["backstage"],
+        "date": "2022-09-20T13:24:56.943Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-scaffolder-backend",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.3152427499996466,
+        "detail": {
+          "quality": 0.5449326666251129,
+          "popularity": 0.10027509527270304,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000022775488
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-search-react",
+        "scope": "backstage",
+        "version": "1.1.0",
+        "description": "A search plugin library which holds functionality the [search plugin](/plugins/search/README.md) itself and other frontend plugins (e.g. [techdocs](/plugins/techdocs/README.md), [home](/plugins/home/README.md)) depend on.",
+        "keywords": ["backstage"],
+        "date": "2022-09-20T13:23:37.619Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-search-react",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.3156795285255195,
+        "detail": {
+          "quality": 0.5575490468611138,
+          "popularity": 0.09070899371576774,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000019299534
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-catalog",
+        "scope": "backstage",
+        "version": "1.5.1",
+        "description": "The Backstage plugin for browsing the Backstage catalog",
+        "keywords": ["backstage"],
+        "date": "2022-09-20T13:24:02.420Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-catalog",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.3122402266398384,
+        "detail": {
+          "quality": 0.5575490468611138,
+          "popularity": 0.08088241689953604,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000019009356
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-catalog-backend",
+        "scope": "backstage",
+        "version": "1.4.0",
+        "description": "The Backstage backend plugin that provides the Backstage catalog",
+        "keywords": ["backstage"],
+        "date": "2022-09-20T13:24:36.133Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-catalog-backend",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.3096435497375507,
+        "detail": {
+          "quality": 0.5241192283874347,
+          "popularity": 0.1021174701561533,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000018655377
+    },
+    {
+      "package": {
+        "name": "@backstage/cli",
+        "scope": "backstage",
+        "version": "0.19.0",
+        "description": "CLI for developing Backstage plugins and apps",
+        "keywords": ["backstage"],
+        "date": "2022-09-20T13:22:51.292Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fcli",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "flags": { "unstable": true },
+      "score": {
+        "final": 0.3735913493499747,
+        "detail": {
+          "quality": 0.7567277044029627,
+          "popularity": 0.08544677532119793,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000018000072
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-techdocs-node",
+        "scope": "backstage",
+        "version": "1.4.0",
+        "description": "Common node.js functionalities for TechDocs, to be shared between techdocs-backend plugin and techdocs-cli",
+        "keywords": ["techdocs", "backstage"],
+        "date": "2022-09-20T13:23:38.764Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-techdocs-node",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.312606321896372,
+        "detail": {
+          "quality": 0.5456189468959702,
+          "popularity": 0.09215420331689803,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000016896416
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-scaffolder-common",
+        "scope": "backstage",
+        "version": "1.2.0",
+        "description": "Common functionalities for the scaffolder, to be shared between scaffolder and scaffolder-backend plugin",
+        "keywords": ["scaffolder"],
+        "date": "2022-09-20T13:22:49.230Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-scaffolder-common",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.31534879220219897,
+        "detail": {
+          "quality": 0.5575490468611138,
+          "popularity": 0.08976403279199482,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000016171167
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-scaffolder",
+        "scope": "backstage",
+        "version": "1.6.0",
+        "description": "The Backstage plugin that helps you create new things",
+        "keywords": ["backstage"],
+        "date": "2022-09-20T13:24:24.339Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-scaffolder",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.30861577870446943,
+        "detail": {
+          "quality": 0.5549513571941374,
+          "popularity": 0.07275344251303309,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000015038002
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-techdocs-react",
+        "scope": "backstage",
+        "version": "1.0.4",
+        "description": "Shared frontend utilities for TechDocs and Addons",
+        "keywords": ["backstage", "techdocs"],
+        "date": "2022-09-20T13:23:22.064Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-techdocs-react",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.31034865304646847,
+        "detail": {
+          "quality": 0.5479573993264812,
+          "popularity": 0.08369933309102127,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000014248768
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-search",
+        "scope": "backstage",
+        "version": "1.0.2",
+        "description": "The Backstage plugin that provides your backstage app with search",
+        "keywords": ["backstage"],
+        "date": "2022-09-20T13:24:25.519Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-search",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.3078214776388589,
+        "detail": {
+          "quality": 0.5575490468611138,
+          "popularity": 0.06825741975388035,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000014234819
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-techdocs",
+        "scope": "backstage",
+        "version": "1.3.2",
+        "description": "The Backstage plugin that renders technical documentation for your components",
+        "keywords": ["backstage", "techdocs"],
+        "date": "2022-09-20T13:24:30.793Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-techdocs",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.3058739036255552,
+        "detail": {
+          "quality": 0.5468635570848825,
+          "popularity": 0.07185191380978226,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000013055991
+    },
+    {
+      "package": {
+        "name": "@roadiehq/backstage-plugin-buildkite",
+        "scope": "roadiehq",
+        "version": "2.0.9",
+        "description": "![a list of builds in the Buildkite plugin for Backstage](./docs/buildkite-plugin.png)",
+        "date": "2022-10-03T11:03:16.372Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40roadiehq%2Fbackstage-plugin-buildkite",
+          "homepage": "https://roadie.io/backstage/plugins/buildkite/",
+          "repository": "https://github.com/RoadieHQ/roadie-backstage-plugins",
+          "bugs": "https://github.com/RoadieHQ/roadie-backstage-plugins/issues"
+        },
+        "publisher": { "username": "roadie-bot", "email": "bot@roadie.io" },
+        "maintainers": [
+          { "username": "kissmikijr", "email": "miklos@roadie.io" },
+          { "username": "sblausten", "email": "sblausten@gmail.com" },
+          { "username": "roadiehq-david", "email": "david@roadie.io" },
+          { "username": "iainbillett", "email": "iain@roadie.io" },
+          { "username": "brianfletcher", "email": "brian@roadie.io" },
+          { "username": "xantier", "email": "jussi@hallila.com" },
+          { "username": "martina-if", "email": "martina@roadie.io" },
+          { "username": "irma1203", "email": "irma@roadie.io" },
+          { "username": "roadie-bot", "email": "bot@roadie.io" }
+        ]
+      },
+      "score": {
+        "final": 0.3124558607488559,
+        "detail": {
+          "quality": 0.6196106902775522,
+          "popularity": 0.02830281999692455,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000009868969
+    },
+    {
+      "package": {
+        "name": "@roadiehq/backstage-plugin-argo-cd",
+        "scope": "roadiehq",
+        "version": "2.1.9",
+        "description": "![](./docs/argo-cd-plugin.webp)",
+        "date": "2022-10-03T11:03:14.049Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40roadiehq%2Fbackstage-plugin-argo-cd",
+          "homepage": "https://roadie.io/backstage/plugins/argo-cd/",
+          "repository": "https://github.com/RoadieHQ/roadie-backstage-plugins",
+          "bugs": "https://github.com/RoadieHQ/roadie-backstage-plugins/issues"
+        },
+        "publisher": { "username": "roadie-bot", "email": "bot@roadie.io" },
+        "maintainers": [
+          { "username": "kissmikijr", "email": "miklos@roadie.io" },
+          { "username": "sblausten", "email": "sblausten@gmail.com" },
+          { "username": "roadiehq-david", "email": "david@roadie.io" },
+          { "username": "iainbillett", "email": "iain@roadie.io" },
+          { "username": "brianfletcher", "email": "brian@roadie.io" },
+          { "username": "xantier", "email": "jussi@hallila.com" },
+          { "username": "martina-if", "email": "martina@roadie.io" },
+          { "username": "irma1203", "email": "irma@roadie.io" },
+          { "username": "roadie-bot", "email": "bot@roadie.io" }
+        ]
+      },
+      "score": {
+        "final": 0.31504046370416483,
+        "detail": {
+          "quality": 0.6336372232065927,
+          "popularity": 0.023664657358629652,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000009100797
+    },
+    {
+      "package": {
+        "name": "@roadiehq/backstage-plugin-travis-ci",
+        "scope": "roadiehq",
+        "version": "2.0.6",
+        "description": "![a list of builds in the Travis CI plugin for Backstage](./docs/travis-ci-plugin-1642x1027.png)",
+        "date": "2022-10-03T11:03:21.079Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40roadiehq%2Fbackstage-plugin-travis-ci",
+          "homepage": "https://roadie.io/backstage/plugins/travis-ci/",
+          "repository": "https://github.com/RoadieHQ/roadie-backstage-plugins",
+          "bugs": "https://github.com/RoadieHQ/roadie-backstage-plugins/issues"
+        },
+        "publisher": { "username": "roadie-bot", "email": "bot@roadie.io" },
+        "maintainers": [
+          { "username": "kissmikijr", "email": "miklos@roadie.io" },
+          { "username": "sblausten", "email": "sblausten@gmail.com" },
+          { "username": "roadiehq-david", "email": "david@roadie.io" },
+          { "username": "iainbillett", "email": "iain@roadie.io" },
+          { "username": "brianfletcher", "email": "brian@roadie.io" },
+          { "username": "xantier", "email": "jussi@hallila.com" },
+          { "username": "martina-if", "email": "martina@roadie.io" },
+          { "username": "irma1203", "email": "irma@roadie.io" },
+          { "username": "roadie-bot", "email": "bot@roadie.io" }
+        ]
+      },
+      "score": {
+        "final": 0.3122025745219617,
+        "detail": {
+          "quality": 0.6196106902775522,
+          "popularity": 0.027579145062941034,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000009095637
+    },
+    {
+      "package": {
+        "name": "@backstage/plugin-techdocs-backend",
+        "scope": "backstage",
+        "version": "1.3.0",
+        "description": "The Backstage backend plugin that renders technical documentation for your components",
+        "keywords": ["backstage", "techdocs"],
+        "date": "2022-09-20T13:23:47.591Z",
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40backstage%2Fplugin-techdocs-backend",
+          "homepage": "https://backstage.io",
+          "repository": "https://github.com/backstage/backstage",
+          "bugs": "https://github.com/backstage/backstage/issues"
+        },
+        "publisher": { "username": "patriko", "email": "patriko@spotify.com" },
+        "maintainers": [
+          { "username": "alund", "email": "alund@spotify.com" },
+          { "username": "patriko", "email": "patriko@spotify.com" },
+          { "username": "freben", "email": "freben@spotify.com" },
+          { "username": "marcuseide", "email": "eide@spotify.com" }
+        ]
+      },
+      "score": {
+        "final": 0.2990523525622327,
+        "detail": {
+          "quality": 0.5425752237016327,
+          "popularity": 0.05603748224307511,
+          "maintenance": 0.3333333333333333
+        }
+      },
+      "searchScore": 0.000008065212
+    }
+  ],
+  "total": 261,
+  "time": "Sat Oct 08 2022 18:21:52 GMT+0000 (Coordinated Universal Time)"
+}
