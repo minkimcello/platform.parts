@@ -24,7 +24,6 @@ import { Config } from '@backstage/config';
 import app from './plugins/app';
 import auth from './plugins/auth';
 import catalog from './plugins/catalog';
-import scaffolder from './plugins/scaffolder';
 import proxy from './plugins/proxy';
 import techdocs from './plugins/techdocs';
 import search from './plugins/search';
@@ -35,7 +34,7 @@ import { DefaultIdentityClient } from '@backstage/plugin-auth-node';
 function makeCreateEnv(config: Config) {
   const root = getRootLogger();
   const reader = UrlReaders.default({ logger: root, config });
-  const discovery = SingleHostDiscovery.fromConfig(config);
+  const discovery = SingleHostDiscovery.fromConfig(config); // app-config.yaml + backend.baseURL + "/api"
   const cacheManager = CacheManager.fromConfig(config);
   const databaseManager = DatabaseManager.fromConfig(config, { logger: root });
   const tokenManager = ServerTokenManager.noop();
@@ -79,7 +78,6 @@ async function main() {
   const createEnv = makeCreateEnv(config);
 
   const catalogEnv = useHotMemoize(module, () => createEnv('catalog'));
-  const scaffolderEnv = useHotMemoize(module, () => createEnv('scaffolder'));
   const authEnv = useHotMemoize(module, () => createEnv('auth'));
   const proxyEnv = useHotMemoize(module, () => createEnv('proxy'));
   const techdocsEnv = useHotMemoize(module, () => createEnv('techdocs'));
@@ -88,7 +86,6 @@ async function main() {
 
   const apiRouter = Router();
   apiRouter.use('/catalog', await catalog(catalogEnv));
-  apiRouter.use('/scaffolder', await scaffolder(scaffolderEnv));
   apiRouter.use('/auth', await auth(authEnv));
   apiRouter.use('/techdocs', await techdocs(techdocsEnv));
   apiRouter.use('/proxy', await proxy(proxyEnv));
