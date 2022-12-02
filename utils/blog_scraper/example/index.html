@@ -1,0 +1,337 @@
+<p>
+  One of the most common questions from early adopters of
+  <a href="https://backstage.io/">Backstage</a> is "how do we get developers to
+  start using the software catalog?" Those asking this question find themselves
+  in a chicken and egg situation - developers need a populated software catalog
+  in order to get value from Backstage, but Backstage requires developers to
+  start using the software catalog to populate it. How do you break this cycle?
+</p>
+<p>
+  In this blog post, we'll describe a two-stage approach that helps Backstage
+  adopters get traction for their software catalog:
+</p>
+<ol>
+  <li>
+    Using a script to generate a single multi-document YAML file of every
+    repository to populate the software catalog - for the purpose of visually
+    demonstrating its proof of concept
+  </li>
+  <li>
+    Using Sourcegraph Batch Changes to kick off and keep track of the entire
+    onboarding process of developers and their repositories to Backstage for the
+    whole organization
+  </li>
+</ol>
+<p>
+  Before we can start populating the catalog, we need a source of data that will
+  be useful for our starting point. One place to start is to populate the
+  catalog with repositories from your version control system. For this tutorial
+  we'll be using GitHub but a similar approach should work for other repository
+  hosts. GitHub provides a <a href="https://cli.github.com">CLI</a> that we can
+  use to get a list of all of the repositories in the organization and some
+  information about them. We'll use the following command for our example to
+  generate a list of repositories with some useful fields:
+</p>
+<pre
+  class="language-bash"
+><code class="language-bash">gh repo list <span class="token operator">&lt;</span>org_name<span class="token operator">&gt;</span> <span class="token punctuation">\</span>
+  --limit<span class="token operator">=</span><span class="token number">1000</span> <span class="token punctuation">\</span>
+  --json<span class="token operator">=</span>description,url,name,owner <span class="token punctuation">\</span>
+  --template<span class="token operator">=</span><span class="token operator">&lt;</span>output_template<span class="token operator">&gt;</span>
+</code></pre>
+<p>
+  The
+  <a href="https://cli.github.com/manual/gh_help_formatting"
+    ><code>--template</code> flag</a
+  >
+  can be used to control what the result will look like. It uses the Go template
+  format with a limited number of output functions so this approach might not
+  scale for complex formatting. The default formatter will be sufficient for
+  this tutorial but you may need to find another formatter.
+</p>
+<h3 id="using-a-multi-document-yaml-file">
+  <a
+    class="anchor"
+    aria-hidden="true"
+    tabindex="-1"
+    href="#using-a-multi-document-yaml-file"
+    ><span class="icon icon-link"></span></a
+  >Using a multi-document YAML file
+</h3>
+<p>
+  The Backstage catalog has a mechanism for ingesting catalog components from
+  files. This mechanism is used to read <code>catalog-info.yaml</code> files and
+  keep the catalog up to date. You can find documentation about it in the
+  <a
+    href="https://backstage.io/docs/features/software-catalog/configuration#static-location-configuration"
+    >Static Location Configuration</a
+  >
+  section of Backstage's documentation.
+</p>
+<p>
+  The static location configuration requires a URL that contains metadata of a
+  component. You can see a bunch of static locations configured in
+  <a
+    href="https://github.com/backstage/demo/blob/master/app-config.yaml#L42-L71"
+    >Backstage's demo app</a
+  >.
+</p>
+<p>
+  It may not be obvious that this can be used to import multiple components from
+  a single file by using a multi-document YAML. A multi-document YAML file uses
+  a <code>---</code> separator to break up the document. You can use this to
+  create a file that contains multiple catalog components. Here is an example of
+  such a document:
+</p>
+<pre
+  class="language-yml"
+><code class="language-yml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> backstage.io/v1alpha1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Component
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> backstage
+  <span class="token key atrule">description</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+		Backstage is an open-source developer portal that puts the developer experience first.</span>
+  <span class="token key atrule">annotations</span><span class="token punctuation">:</span>
+		<span class="token key atrule">github.com/project-slug</span><span class="token punctuation">:</span> backstage/backstage
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">type</span><span class="token punctuation">:</span> library
+  <span class="token key atrule">owner</span><span class="token punctuation">:</span> CNCF
+  <span class="token key atrule">lifecycle</span><span class="token punctuation">:</span> experimental
+<span class="token punctuation">---</span>
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> backstage.io/v1alpha1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Component
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> demo
+  <span class="token key atrule">description</span><span class="token punctuation">:</span> An example deployment of a Backstage application.
+  <span class="token key atrule">annotations</span><span class="token punctuation">:</span>
+		<span class="token key atrule">github.com/project-slug</span><span class="token punctuation">:</span> backstage/demo
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">type</span><span class="token punctuation">:</span> website
+  <span class="token key atrule">owner</span><span class="token punctuation">:</span> backstage/maintainers
+  <span class="token key atrule">lifecycle</span><span class="token punctuation">:</span> experimental
+<span class="token punctuation">---</span>
+</code></pre>
+<p>
+  Now, we can use the generated <code>components.yaml</code> file with a static
+  location to ingest all of these components into Backstage. To make this file
+  available to your Backstage instance, you could commit this file to a
+  repository and reference the URL of the file for your catalog location:
+</p>
+<pre
+  class="language-yml"
+><code class="language-yml"><span class="token comment"># app-config.yaml</span>
+  <span class="token key atrule">catalog</span><span class="token punctuation">:</span>
+	<span class="token key atrule">locations</span><span class="token punctuation">:</span>
+  	<span class="token punctuation">-</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> url
+    	<span class="token key atrule">target</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//github.com/my<span class="token punctuation">-</span>org/my<span class="token punctuation">-</span>repo/blob/main/components.yaml
+</code></pre>
+<p>
+  Backstage will read this file and create a component for each YAML document in
+  your <code>components.yaml</code> file. Backstage will automatically update
+  when this file is changed. So if a repository is deleted or a new one is
+  created, or say if you need to update the descriptions of components, you just
+  need to rerun the same script and push the new
+  <code>components.yaml</code> file.
+</p>
+<p>
+  This approach can be an easy and quick way to populate your catalog. You could
+  even automate updating the catalog by creating a GitHub Actions workflow that
+  will trigger on a cron to rerun this script and push the updated file into the
+  repository. You can also do this with Sourcegraph Code Monitors, which we'll
+  dicuss in the next blog post.
+</p>
+<p>
+  Bootstrapping the catalog with a multi-document YAML file generated from a
+  script works well as a proof of concept, but it becomes inconvenient when you
+  have users who want to manage the metadata of their catalog components. Once
+  you are done demonstrating this proof of concept, you can go ahead and remove
+  the location of the multi-document YAML file:
+</p>
+<pre class="language-diff"><code class="language-diff"># app-config.yaml
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> catalog:
+</span></span>	locations:
+<span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  	- type: url
+</span><span class="token prefix deleted">-</span><span class="token line">    	  target: https://github.com/my-org/my-repo/blob/main/components.yaml
+</span></span></code></pre>
+<h3 id="using-sourcegraph-to-open-pull-requests">
+  <a
+    class="anchor"
+    aria-hidden="true"
+    tabindex="-1"
+    href="#using-sourcegraph-to-open-pull-requests"
+    ><span class="icon icon-link"></span></a
+  >Using Sourcegraph to open pull requests
+</h3>
+<p>
+  Backstage Software catalog is designed to empower developers to own the
+  metadata of the components they use. It provides a GitOps-friendly way of
+  pulling component metadata from repositories into the catalog's database.
+  Information like the component's name, owner, type, and other metadata can be
+  described via the <code>catalog-info.yaml</code> file. Developers can edit
+  this file in their repository and Backstage will automatically read the
+  changed file to update the metadata in the database.
+</p>
+<p>
+  To avoid the chicken-and-egg problem while setting up Backstage, we can
+  bootstrap the creation of <code>catalog-info.yaml</code> files with
+  Sourcegraph's
+  <a href="https://docs.sourcegraph.com/batch_changes"
+    ><code>Batch Changes</code></a
+  >. Sourcegraph will automatically open pull requests against every repository
+  to add a <code>catalog-info.yaml</code> file.
+</p>
+<p>
+  The benefit of this approach is that repository owners can either just merge
+  the pull request without additional work. Or, even if they want to change the
+  description, add links, or update the owners listed in the
+  <code>catalog-info.yaml</code> file before merging the pull request, at least
+  the pull request was started.
+</p>
+<p>
+  Moreover, Sourcegraph Batch Changes let you track all PRs to completion. So,
+  if you want to open PRs against all repos but don't know the ownership
+  information, you can start the process, then use the dashboard to figure out
+  who you need to follow up with to make sure everything gets merged.
+</p>
+<p>
+  Let's see what this batch change would look like. Sourcegraph's Batch Changes
+  are described by a spec that consist of three main parts:
+</p>
+<ul>
+  <li>A search query</li>
+  <li>Steps to execute to generate the diff</li>
+  <li>A pull request template</li>
+</ul>
+<p>
+  Here’s an example of a batch change spec for adding
+  <code>catalog-info.yaml</code> files to your repositories:
+</p>
+<pre
+  class="language-yml"
+><code class="language-yml"><span class="token key atrule">name</span><span class="token punctuation">:</span> generate<span class="token punctuation">-</span>catalog<span class="token punctuation">-</span>infos<span class="token punctuation">-</span>for<span class="token punctuation">-</span>backstage
+<span class="token key atrule">description</span><span class="token punctuation">:</span> Batch change to add repositories to the Backstage catalog
+
+<span class="token comment"># All repos from a given codehost</span>
+<span class="token key atrule">on</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">repositoriesMatchingQuery</span><span class="token punctuation">:</span> repo<span class="token punctuation">:</span>github\.com
+
+<span class="token key atrule">steps</span><span class="token punctuation">:</span>
+  <span class="token comment"># Run comby over the search results in each repository:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+  	apk add github-cli;
+  	gh auth login -h github.com;
+  	gh repo view sourcegraph/sourcegraph --json=description,url,name,owner,nameWithOwner,languages &gt; tmp.json;
+  	python /tmp/create-catalog.py;
+  	rm tmp.json</span>
+	<span class="token key atrule">container</span><span class="token punctuation">:</span> python<span class="token punctuation">:</span>3<span class="token punctuation">-</span>alpine
+	<span class="token key atrule">files</span><span class="token punctuation">:</span>
+  	<span class="token key atrule">/tmp/create-catalog.py</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+    	import json
+    	TEMPLATE ="""kind: Component
+    	metadata:</span>
+      	<span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+      	<span class="token key atrule">description</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+        	{}</span>
+      	<span class="token key atrule">links</span><span class="token punctuation">:</span>
+      	<span class="token punctuation">-</span> <span class="token key atrule">title</span><span class="token punctuation">:</span> Repository
+        	<span class="token key atrule">url</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+      	<span class="token key atrule">annotations</span><span class="token punctuation">:</span>
+        	<span class="token key atrule">github.com/project-slug</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    	"""
+    	with open('tmp.json'<span class="token punctuation">,</span>'r') as f<span class="token punctuation">:</span>
+        	metadata = json.load(f)
+        	with open('catalog<span class="token punctuation">-</span>info.yml'<span class="token punctuation">,</span>'w+') as out<span class="token punctuation">:</span>
+            	out.write(TEMPLATE.format(metadata<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>metadata<span class="token punctuation">[</span><span class="token string">"description"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>metadata<span class="token punctuation">[</span><span class="token string">"url"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>metadata<span class="token punctuation">[</span><span class="token string">"nameWithOwner"</span><span class="token punctuation">]</span>))
+	<span class="token comment"># Make sure to set GH_TOKEN in your local shell</span>
+	<span class="token comment"># Note: setting env variables/secrets is not yet available when running server-side. Coming soon!</span>
+	<span class="token key atrule">env</span><span class="token punctuation">:</span>
+  	<span class="token punctuation">-</span> GH_TOKEN
+<span class="token key atrule">changesetTemplate</span><span class="token punctuation">:</span>
+  <span class="token key atrule">title</span><span class="token punctuation">:</span> Add this repository to Backstage
+  <span class="token key atrule">body</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+		This pull request includes a `catalog-info.yaml` which allows you to specify the metadata of this repository for the [Backstage Software Catalog](https://backstage.io/docs/features/software-catalog/software-catalog-overview). You can learn more about the `catalog-info.yaml` file [here](https://backstage.io/docs/features/software-catalog/descriptor-format).
+		Once this pull request is merged, please register your component in [Backstage](https://&lt;your-backstage-app-URL&gt;/catalog-import).</span>
+  <span class="token key atrule">branch</span><span class="token punctuation">:</span> add<span class="token punctuation">-</span>catalog<span class="token punctuation">-</span>info
+  <span class="token key atrule">commit</span><span class="token punctuation">:</span>
+		<span class="token key atrule">message</span><span class="token punctuation">:</span> Add repo to Backstage service catalog
+</code></pre>
+<p>
+  Let's zoom in on the steps section. A batch change works by running any number
+  of steps to generate a diff. Each step corresponds to running a container on
+  the target code. This spec has a single step that will install the GitHub CLI
+  to get the metadata we need about the repo then run a small python script to
+  format it.
+</p>
+<p>We use a few utilities to keep things clean:</p>
+<ul>
+  <li>
+    We need to authenticate to run the GitHub CLI - this is done by setting an
+    environment variable with
+    <a
+      href="https://docs.sourcegraph.com/batch_changes/references/batch_spec_yaml_reference#steps-env"
+      >env</a
+    >
+    and assumes that <code>GH_TOKEN</code> is available locally when running the
+    spec.
+  </li>
+  <li>
+    To keep things cleaner, we provide the script as a separate
+    <a
+      href="https://docs.sourcegraph.com/batch_changes/references/batch_spec_yaml_reference#steps-files"
+      >file</a
+    >
+    that will be mounted on the container at runtime.
+  </li>
+</ul>
+<p>
+  Running this spec in Sourcegraph Batch Changes will create pull requests to
+  add a <code>catalog-info.yaml</code> to all the repositories matching the
+  search query. You can keep track to ensure those pull requests get merged from
+  the Sourcegraph
+  <a
+    href="https://docs.sourcegraph.com/batch_changes/explanations/introduction_to_batch_changes#overview"
+    >Batch Changes dashboard</a
+  >.
+</p>
+<p>
+  Lastly, once a pull request is merged to introduce
+  <code>catalog-info.yaml</code>, a developer must then go register the
+  component. One way a component can be manually registered is by going directly
+  to <code>https://&lt;my-backstage-app-URL&gt;/catalog-import</code>:
+</p>
+<figure>
+  <img
+    src="https://storage.googleapis.com/sourcegraph-assets/blog/sourcegraph-backstage-blogpost/backstage-catalog-register.png "
+    alt="Screenshot of the backstage catalog component registration UI"
+    title="Screenshot of the backstage catalog component registration UI"
+    class="tw-drop-shadow-xl"
+  />
+</figure>
+<h3 id="next-fully-automate-component-registration">
+  <a
+    class="anchor"
+    aria-hidden="true"
+    tabindex="-1"
+    href="#next-fully-automate-component-registration"
+    ><span class="icon icon-link"></span></a
+  >Next: fully automate component registration
+</h3>
+<p>
+  In the next blog post, we will go over how the component registration can be
+  fully automated by creating a Backstage entity provider with Sourcegraph's
+  search and monitoring features.
+</p>
+<div class="mt-6"></div>
+<h2 id="about-the-authors">
+  <a class="anchor" aria-hidden="true" tabindex="-1" href="#about-the-authors"
+    ><span class="icon icon-link"></span></a
+  >About the authors
+</h2>
+<p>
+  <em
+    >Taras Mankovski and Min Kim are respectively the CEO and technical fellow
+    at <a href="https://frontside.com/">The Frontside Software, Inc</a>, a
+    Backstage Professional Services Partner and DX Consulting Company. Malo and
+    Joel are product managers at Sourcegraph.</em
+  >
+</p>
